@@ -15,7 +15,7 @@ class CustomerConverterTest {
         assertEquals(customer.getFirstName(),convertedCustomer.getFirstName());
         assertEquals(customer.getLastName(), convertedCustomer.getLastName());
         assertEquals(customer.getCountry(), convertedCustomer.getCountry());
-        assertEquals(customer.getUsername(), convertedCustomer.getUsername());
+        assertEquals(customer.getUsername(), convertedCustomer.getUsername()+"ari");
     }
 
 }
