@@ -10,6 +10,8 @@ public interface CustomerRepository {
     CustomerEntity save(CustomerEntity customer);
     void deleteById(long customerId);
     Optional<CustomerEntity> findById(long customerId);
+    boolean ExistsById(long customerId);
+
     int count();
 
     boolean existsByUsername(String username);

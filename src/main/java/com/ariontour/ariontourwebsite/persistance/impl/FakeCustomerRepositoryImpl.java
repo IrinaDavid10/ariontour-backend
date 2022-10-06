@@ -28,6 +28,13 @@ public class FakeCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    public boolean ExistsById(long customerId){
+        if(this.savedCustomers.stream().anyMatch(customerEntity -> customerEntity.getId().equals(customerId))){
+            return true;
+        }
+         return false;
+    }
+    @Override
     public void deleteById(long customerId){
         this.savedCustomers.removeIf(customerEntity -> customerEntity.getId().equals(customerId));
     }
