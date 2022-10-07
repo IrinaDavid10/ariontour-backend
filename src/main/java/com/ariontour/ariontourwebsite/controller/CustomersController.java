@@ -31,6 +31,7 @@ public class CustomersController {
         return ResponseEntity.ok(getCustomersUseCase.getCustomers());
     }
 
+
     @GetMapping("{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable(value = "id") final long id){
         final Optional<Customer> customerOptional = getCustomerUseCase.getCustomer(id);

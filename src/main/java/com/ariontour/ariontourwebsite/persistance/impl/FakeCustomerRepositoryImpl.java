@@ -28,7 +28,7 @@ public class FakeCustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public boolean ExistsById(long customerId){
+    public boolean existsById(long customerId){
         if(this.savedCustomers.stream().anyMatch(customerEntity -> customerEntity.getId().equals(customerId))){
             return true;
         }

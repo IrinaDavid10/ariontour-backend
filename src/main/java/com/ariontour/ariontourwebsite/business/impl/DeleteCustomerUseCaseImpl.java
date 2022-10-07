@@ -14,7 +14,7 @@ public class DeleteCustomerUseCaseImpl implements DeleteCustomerUseCase {
 
     @Override
     public boolean deleteCustomer(DeleteCustomerRequest request) {
-        if(customerRepository.ExistsById(request.getId())){
+        if(customerRepository.existsById(request.getId())){
             customerRepository.deleteById(request.getId());
             return true;
         }
