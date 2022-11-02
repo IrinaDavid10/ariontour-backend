@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+public class Country {
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String country;
-
+    private String country_name;
+    private String country_code;
 }

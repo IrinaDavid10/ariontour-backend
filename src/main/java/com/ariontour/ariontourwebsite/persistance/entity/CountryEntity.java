@@ -8,16 +8,14 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 
 @Entity
-@Table (name = "customer")
-@Data
+@Table(name = "country")
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerEntity {
+public class CountryEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -25,19 +23,13 @@ public class CustomerEntity {
 
     @NotBlank
     @Length (min = 2, max = 50)
-    @Column (name = "first_name")
-    private String firstName;
+    @Column (name = "country_name")
+    private String countryName;
 
     @NotBlank
-    @Length (min = 2, max = 50)
-    @Column (name = "last_name")
-    private String lastName;
-
-     @NotNull
-     @ManyToOne
-     @JoinColumn (name = "country_code", referencedColumnName = "country_code")
-     private CountryEntity country;
+    @Length (min = 2, max = 2)
+    @Column (name = "country_code")
+    private String countryCode;
 
 
-    //private String username;
 }

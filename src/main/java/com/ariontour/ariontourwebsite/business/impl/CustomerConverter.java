@@ -12,8 +12,7 @@ public class CustomerConverter {
                 .id(customer.getId())
                 .firstName(customer.getFirstName())
                 .lastName(customer.getLastName())
-                .country(customer.getCountry())
-                .username(customer.getUsername())
+                .country(customer.getCountry().getCountryCode())
                 .build();
     }
 }

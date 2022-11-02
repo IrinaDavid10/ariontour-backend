@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 public class CreateCustomerRequest {
     private String firstName;
     private String lastName;
-    private String country;
-    private String username;
-
+    private String country_code;
 
 }
 /*
