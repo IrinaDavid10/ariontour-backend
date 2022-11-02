@@ -17,8 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
-//@CrossOrigin(origins = {"http://localhost/3000"})
-@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
+@CrossOrigin(origins ={"http://localhost:3000"})
 @AllArgsConstructor
 public class CustomersController {
     private final GetCustomersUseCase getCustomersUseCase;

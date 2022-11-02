@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/countries")
-//@CrossOrigin(origins = {"http://localhost/3000"})
-@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
+@CrossOrigin(origins ={"http://localhost:3000"})
 @AllArgsConstructor
 
 public class CountriesController {
