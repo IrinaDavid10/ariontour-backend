@@ -39,5 +39,4 @@ public class CustomerEntity {
      private CountryEntity country;
 
 
-    //private String username;
 }

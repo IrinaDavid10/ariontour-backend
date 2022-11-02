@@ -15,10 +15,3 @@ public class CreateCustomerRequest {
     private String country_code;
 
 }
-/*
-private Long id;
-    private String firstName;
-    private String lastName;
-    private String country;
-    private String username;
- */
