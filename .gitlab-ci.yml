@@ -11,12 +11,13 @@ build:
   script:
     - ./gradlew assemble
 
+sonarqube:
+  stage: sonarqube
+  script:
+    - ./gradlew sonarqube
+
 test:
   stage: test
   script:
     - ./gradlew test
 
-sonarqube:
-  stage: sonarqube
-  script:
-    - ./gradlew sonarqube
