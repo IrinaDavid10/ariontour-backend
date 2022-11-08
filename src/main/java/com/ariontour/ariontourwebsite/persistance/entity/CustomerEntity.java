@@ -35,7 +35,7 @@ public class CustomerEntity {
 
      @NotNull
      @ManyToOne
-     @JoinColumn (name = "country_code", referencedColumnName = "country_code")
+    @JoinColumn (name = "country_code", referencedColumnName = "country_code")
      private CountryEntity country;
 
 
