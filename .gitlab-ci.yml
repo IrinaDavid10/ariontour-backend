@@ -3,8 +3,9 @@ variables:
 
 stages:
   - build
-  - test
   - sonarqube
+  - test
+
 
 build:
   stage: build
