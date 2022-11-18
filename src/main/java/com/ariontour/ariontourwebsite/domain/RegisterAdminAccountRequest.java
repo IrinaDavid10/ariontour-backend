@@ -6,21 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CreateCountryRequest {
+@NoArgsConstructor
+public class RegisterAdminAccountRequest {
     @NotBlank
-    @Length (min = 2, max = 50)
-    private String country_name;
+    @Length(min = 2, max = 16)
+    private  String username;
 
     @NotBlank
-    @Length (min = 2, max = 2)
-    private String country_code;
-
-
+    @Length(min = 2)
+    private  String password;
 }
