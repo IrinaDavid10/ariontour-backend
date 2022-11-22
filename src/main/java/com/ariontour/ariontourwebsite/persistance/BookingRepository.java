@@ -1,5 +1,8 @@
 package com.ariontour.ariontourwebsite.persistance;
 
-public interface BookingRepository {
-    boolean existsByUsername(String username);
+import com.ariontour.ariontourwebsite.persistance.entity.BookingEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
+
 }

@@ -1,7 +1,6 @@
 package com.ariontour.ariontourwebsite.controller;
 
 import com.ariontour.ariontourwebsite.business.CreateLocationUseCase;
-import com.ariontour.ariontourwebsite.business.DeleteCustomerUseCase;
 import com.ariontour.ariontourwebsite.domain.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

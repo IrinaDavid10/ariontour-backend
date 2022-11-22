@@ -4,7 +4,6 @@ package com.ariontour.ariontourwebsite.controller;
 import com.ariontour.ariontourwebsite.business.RegisterAdminAccountUseCase;
 import com.ariontour.ariontourwebsite.domain.RegisterAdminAccountRequest;
 import com.ariontour.ariontourwebsite.domain.RegisterAdminAccountResponse;
-import com.ariontour.ariontourwebsite.domain.RegisterCustomerAccountRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

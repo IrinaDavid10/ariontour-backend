@@ -1,17 +1,13 @@
 package com.ariontour.ariontourwebsite.controller;
 
 import com.ariontour.ariontourwebsite.business.CreateEventUseCase;
-import com.ariontour.ariontourwebsite.business.CreateLocationUseCase;
 import com.ariontour.ariontourwebsite.domain.CreateEventRequest;
 import com.ariontour.ariontourwebsite.domain.CreateEventResponse;
-import com.ariontour.ariontourwebsite.domain.CreateLocationRequest;
-import com.ariontour.ariontourwebsite.domain.CreateLocationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 
 @RestController

@@ -4,10 +4,8 @@ import com.ariontour.ariontourwebsite.business.LoginUseCase;
 import com.ariontour.ariontourwebsite.domain.LoginRequest;
 import com.ariontour.ariontourwebsite.domain.LoginResponse;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController
