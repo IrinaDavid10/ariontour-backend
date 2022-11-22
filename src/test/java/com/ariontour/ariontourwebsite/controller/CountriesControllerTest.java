@@ -1,5 +1,6 @@
 package com.ariontour.ariontourwebsite.controller;
 
+import com.ariontour.ariontourwebsite.business.AccessTokenDecoder;
 import com.ariontour.ariontourwebsite.business.CreateCountryUseCase;
 import com.ariontour.ariontourwebsite.business.GetCountriesUseCase;
 import com.ariontour.ariontourwebsite.domain.Country;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,8 +35,11 @@ class CountriesControllerTest {
     private GetCountriesUseCase getCountriesUseCaseMock;
     @MockBean
     private CreateCountryUseCase createCountryUseCaseMock;
+    @MockBean
+    private AccessTokenDecoder accessTokenDecoder;
 
     @Test
+    @WithMockUser(username = "Irma", roles = {"ADMIN"})
     void getCountries_shouldReturn200ResponseWithCountriesArray() throws Exception {
         GetCountryResponse response = GetCountryResponse.builder()
                 .countries(List.of(
@@ -73,6 +79,7 @@ class CountriesControllerTest {
     }
 
       @Test
+      @WithMockUser(username = "Irma", roles = {"ADMIN"})
     void createCountry_shouldCreateAndReturn201_WhenRequestValid() throws Exception {
           CreateCountryRequest expectedCountry = CreateCountryRequest.builder()
                   .country_code("NL")
@@ -85,10 +92,11 @@ class CountriesControllerTest {
                           .build());
           mockMvc.perform(MockMvcRequestBuilders.post("/countries")
                   .contentType(APPLICATION_JSON_VALUE)
+                          .with(csrf())
                   .content("""
                           {
-                          "country_code":"NL",
-                          "country_name":"Netherlands"
+                          "country_name":"Netherlands",
+                          "country_code":"NL"
                           }
                           """))
                   .andDo(print())
@@ -101,25 +109,30 @@ class CountriesControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Irmassss", roles = {"ADMIN"})
     void createCountry_shouldNotCreateAndReturn400_WhenMissingFields() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.post("/countries")
                         .contentType(APPLICATION_JSON_VALUE)
+                        .with(csrf())
                         .content("""
                                                         {
-                                                        "code":"",
-                                                        "name":""
+                                                        "country_code":"",
+                                                        "country_name":""
                                                         }
                                                         """))
+
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
                 .andExpect(content().json("""
                          [
-                         {"field": "name", "error": "must not be blank"},
-                         {"field": "code", "error": "must not be blank"},
-                         {"field": "name", "error": "length must be between 2 and 50"}
+                         {"field": "country_name", "error": "must not be blank"},
+                         {"field": "country_code", "error": "length must be between 2 and 2"},
+                         {"field": "country_code", "error": "must not be blank"},
+                         {"field": "country_name", "error": "length must be between 2 and 50"}
                          ]
                       """));
+
         verifyNoInteractions(createCountryUseCaseMock);
     }
 }

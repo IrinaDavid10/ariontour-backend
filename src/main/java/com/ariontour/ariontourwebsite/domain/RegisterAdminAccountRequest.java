@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -13,8 +14,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterAdminAccountRequest {
+
+
     @NotBlank
-    @Length(min = 2, max = 16)
+    @Length(min = 2, max = 20)
     private  String username;
 
     @NotBlank

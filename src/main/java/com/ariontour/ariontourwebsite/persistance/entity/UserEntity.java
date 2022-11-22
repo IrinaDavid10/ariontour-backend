@@ -24,6 +24,8 @@ public class UserEntity {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private CustomerEntity customer;
 
+
+
     @NotBlank
     @Length(min = 2, max = 20)
     @Column(name = "username")
