@@ -1,29 +1,25 @@
 package com.ariontour.ariontourwebsite.persistance.entity;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "user_role")
+@Table(name = "ticket_type")
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRoleEntity {
+public class TicketTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotNull
-    @Column(name = "role_name")
+    @Column(name = "type_name")
     @Enumerated(EnumType.STRING)
-    private RoleEnum role;
+    private TicketEnum ticketType;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private UserEntity user;
 }
