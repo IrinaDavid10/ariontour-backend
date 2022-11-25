@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Location {
     private Long id;
     private String city;
-    private String country;
+    private Country country;
 
 }

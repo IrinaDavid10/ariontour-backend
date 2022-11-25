@@ -25,7 +25,7 @@ public class CountriesController {
     }
 
     @GetMapping
-    public ResponseEntity<GetCountryResponse> getCountries(){
+    public ResponseEntity<GetCountriesResponse> getCountries(){
         return ResponseEntity.ok(getCountriesUseCase.getCountries());
     }
 }

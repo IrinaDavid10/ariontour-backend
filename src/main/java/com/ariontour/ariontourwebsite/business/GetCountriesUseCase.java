@@ -1,7 +1,7 @@
 package com.ariontour.ariontourwebsite.business;
 
-import com.ariontour.ariontourwebsite.domain.GetCountryResponse;
+import com.ariontour.ariontourwebsite.domain.GetCountriesResponse;
 
 public interface GetCountriesUseCase {
-    GetCountryResponse getCountries();
+    GetCountriesResponse getCountries();
 }

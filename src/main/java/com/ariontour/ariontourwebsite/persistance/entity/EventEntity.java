@@ -30,6 +30,11 @@ public class EventEntity {
     @Column (name = "title")
     private String title;
 
+    @NotBlank
+    @Length( max = 500)
+    @Column (name = "description")
+    private String description;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")

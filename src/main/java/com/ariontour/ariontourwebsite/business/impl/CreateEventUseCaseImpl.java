@@ -41,6 +41,7 @@ public class CreateEventUseCaseImpl implements CreateEventUseCase {
                 .title(request.getTitle())
                 .location(location)
                 .dateTime(dateTime)
+                .description(request.getDescription())
                 .build();
 
         return eventRepository.save(newEvent);

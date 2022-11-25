@@ -1,7 +1,7 @@
 package com.ariontour.ariontourwebsite.business.impl;
 
 import com.ariontour.ariontourwebsite.domain.Country;
-import com.ariontour.ariontourwebsite.domain.GetCountryResponse;
+import com.ariontour.ariontourwebsite.domain.GetCountriesResponse;
 import com.ariontour.ariontourwebsite.persistance.CountryRepository;
 import com.ariontour.ariontourwebsite.persistance.entity.CountryEntity;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ class GetCountriesUseCaseImplTest {
         when(countryRepositoryMock.findAll())
                 .thenReturn(List.of(netherlandsEntity,brazilEntity));
 
-        GetCountryResponse actualResult = getCountriesUseCase.getCountries();
+        GetCountriesResponse actualResult = getCountriesUseCase.getCountries();
         Country netherlands = Country.builder()
                 .id(1L)
                 .country_name("Netherlands")
@@ -49,7 +49,7 @@ class GetCountriesUseCaseImplTest {
                 .country_name("Brazil")
                 .country_code("BR")
                 .build();
-        GetCountryResponse expectedResult = GetCountryResponse.builder()
+        GetCountriesResponse expectedResult = GetCountriesResponse.builder()
                 .countries(List.of(netherlands,brazil))
                 .build();
         assertEquals(expectedResult,actualResult);

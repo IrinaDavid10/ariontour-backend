@@ -6,7 +6,7 @@ import com.ariontour.ariontourwebsite.business.GetCountriesUseCase;
 import com.ariontour.ariontourwebsite.domain.Country;
 import com.ariontour.ariontourwebsite.domain.CreateCountryRequest;
 import com.ariontour.ariontourwebsite.domain.CreateCountryResponse;
-import com.ariontour.ariontourwebsite.domain.GetCountryResponse;
+import com.ariontour.ariontourwebsite.domain.GetCountriesResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ class CountriesControllerTest {
     @Test
     @WithMockUser(username = "Irma", roles = {"ADMIN"})
     void getCountries_shouldReturn200ResponseWithCountriesArray() throws Exception {
-        GetCountryResponse response = GetCountryResponse.builder()
+        GetCountriesResponse response = GetCountriesResponse.builder()
                 .countries(List.of(
                         Country.builder().id(1L)
                                 .country_name("Netherlands")
