@@ -18,7 +18,7 @@ public class LocationConverter {
 
         return Location.builder()
                 .id(locationEntity.getId())
-                .city(locationEntity.getCity())
+                .city(locationEntity.getCity().getCityName())
                 .country(country)
                 .build();
     }

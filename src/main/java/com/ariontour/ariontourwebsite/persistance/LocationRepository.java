@@ -1,9 +1,10 @@
 package com.ariontour.ariontourwebsite.persistance;
 
-import com.ariontour.ariontourwebsite.persistance.entity.CountryEntity;
 import com.ariontour.ariontourwebsite.persistance.entity.LocationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
-    LocationEntity findById(String locationId);
+    boolean existsByCityCityNameAndCountryCountryCode(String city_name, String country_code);
+    LocationEntity findByCityCityNameAndCountryCountryCode(String city_name, String country_code);
+
 }
