@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -25,7 +27,7 @@ public class EventsController {
     public ResponseEntity<GetEventsResponse> getEvents(){
         return ResponseEntity.ok(getEventsUseCase.getEvents());
     }
-
+    
     @GetMapping("{id}")
     public ResponseEntity<Event> getEvent(@PathVariable(value = "id") final long id){
         final Optional<Event> eventOptional = getEventUseCase.getEvent(id);
@@ -34,6 +36,8 @@ public class EventsController {
         }
         return ResponseEntity.ok().body(eventOptional.get());
     }
+
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<CreateEventResponse> createEvent(@RequestBody CreateEventRequest request, @RequestParam("localDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime){
