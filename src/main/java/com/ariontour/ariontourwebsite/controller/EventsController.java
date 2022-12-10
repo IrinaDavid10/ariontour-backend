@@ -1,6 +1,7 @@
 package com.ariontour.ariontourwebsite.controller;
 
 import com.ariontour.ariontourwebsite.business.CreateEventUseCase;
+import com.ariontour.ariontourwebsite.business.GetEventTicketsAmountByTypeUseCase;
 import com.ariontour.ariontourwebsite.business.GetEventUseCase;
 import com.ariontour.ariontourwebsite.business.GetEventsUseCase;
 import com.ariontour.ariontourwebsite.domain.*;
@@ -22,7 +23,7 @@ public class EventsController {
     private final CreateEventUseCase createEventUseCase;
     private final GetEventsUseCase getEventsUseCase;
     private final GetEventUseCase getEventUseCase;
-
+    private final GetEventTicketsAmountByTypeUseCase getEventTicketsAmountByTypeUseCase;
     @GetMapping
     public ResponseEntity<GetEventsResponse> getEvents(){
         return ResponseEntity.ok(getEventsUseCase.getEvents());
@@ -35,6 +36,12 @@ public class EventsController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(eventOptional.get());
+    }
+   
+    @GetMapping("/{eventId}/tickets")
+    public ResponseEntity<GetEventTicketsAmountByTypeResponse> getTicketsAmountByType(@PathVariable(value = "eventId")  final Long eventId,@RequestParam(value = "type_id") final Long type_id){
+
+        return ResponseEntity.ok().body(getEventTicketsAmountByTypeUseCase.getTicketsAmountByType(type_id, eventId));
     }
 
     @RolesAllowed({"ROLE_ADMIN"})
