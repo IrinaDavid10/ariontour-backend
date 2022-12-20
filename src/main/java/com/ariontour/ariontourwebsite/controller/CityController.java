@@ -26,6 +26,7 @@ public class CityController {
 
     @GetMapping
     public ResponseEntity<GetCitiesResponse> getCities(){
+
         return ResponseEntity.ok(getCitiesUseCase.getCities());
     }
 }

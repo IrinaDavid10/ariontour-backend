@@ -10,9 +10,7 @@ import java.util.Optional;
 
 public class EventConverter {
 
-    private EventConverter(){
 
-    }
     public static Event convert(EventEntity event) {
         Location location = Optional.ofNullable(event.getLocation())
                 .map(LocationConverter::convert)

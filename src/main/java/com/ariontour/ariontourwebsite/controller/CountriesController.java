@@ -13,7 +13,6 @@ import javax.validation.Valid;
 @RequestMapping("/countries")
 @CrossOrigin(origins ={"http://localhost:3000"})
 @AllArgsConstructor
-
 public class CountriesController {
     private final CreateCountryUseCase createCountryUseCase;
     private final GetCountriesUseCase getCountriesUseCase;

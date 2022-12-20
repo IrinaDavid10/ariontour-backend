@@ -56,6 +56,7 @@ class CountriesControllerTest {
 
         when(getCountriesUseCaseMock.getCountries())
                 .thenReturn(response);
+
         mockMvc.perform(MockMvcRequestBuilders.get("/countries"))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())

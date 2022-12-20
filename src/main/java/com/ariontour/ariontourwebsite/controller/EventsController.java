@@ -37,7 +37,7 @@ public class EventsController {
         }
         return ResponseEntity.ok().body(eventOptional.get());
     }
-   
+
     @GetMapping("/{eventId}/tickets")
     public ResponseEntity<GetEventTicketsAmountByTypeResponse> getTicketsAmountByType(@PathVariable(value = "eventId")  final Long eventId,@RequestParam(value = "type_id") final Long type_id){
 

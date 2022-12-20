@@ -25,13 +25,12 @@ public class CreateCityUseCaseImpl implements CreateCityUseCase {
     @Override
     public CreateCityResponse createCity(CreateCityRequest request) {
 
-        System.out.println("AAAAAAAAAAAAAA");
+
         if (cityRepository.existsByCityName(request.getCity_name())) {
             throw new InvalidCityException("CITY_DUPLICATED");
         }
-        System.out.println("AAAAAAAAAAAAAA");
-        if(!countryRepository.existsByCountryCode(request.getCountry_code()))
-        {
+
+        if (!countryRepository.existsByCountryCode(request.getCountry_code())) {
             throw new InvalidCountryException("COUNTRY_DOESNT_EXISTS");
         }
         CountryEntity country = countryRepository.findByCountryCode(request.getCountry_code());
@@ -40,6 +39,7 @@ public class CreateCityUseCaseImpl implements CreateCityUseCase {
                 .cityName(request.getCity_name())
                 .country(country)
                 .build();
+
         CityEntity savedCity = cityRepository.save(newCity);
 
         return CreateCityResponse.builder()
