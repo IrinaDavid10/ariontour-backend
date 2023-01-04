@@ -22,5 +22,6 @@ public class TicketsController {
     public ResponseEntity<CreateTicketResponse> createTicket(@RequestBody CreateTicketRequest request){
         CreateTicketResponse response = createTicketUseCase.createTicket(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
     }
 }
