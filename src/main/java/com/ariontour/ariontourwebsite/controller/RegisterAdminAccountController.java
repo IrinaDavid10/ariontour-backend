@@ -9,13 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/registeradmin")
 @CrossOrigin(origins ={"http://localhost:3000"})
 @AllArgsConstructor
+
 public class RegisterAdminAccountController {
     private final RegisterAdminAccountUseCase registerAdminAccountUseCase;
-
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<RegisterAdminAccountResponse> registerAdminAccount(@RequestBody RegisterAdminAccountRequest request){
         RegisterAdminAccountResponse response = registerAdminAccountUseCase.registerAdmin(request);
