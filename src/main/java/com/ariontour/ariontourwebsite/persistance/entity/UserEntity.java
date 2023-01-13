@@ -20,7 +20,7 @@ public class UserEntity {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(optional = true)
+    @OneToOne(optional = true,cascade = CascadeType.REMOVE)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private CustomerEntity customer;
 
@@ -37,6 +37,6 @@ public class UserEntity {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false, insertable = false)
     private Set<UserRoleEntity> userRoles;
 }
