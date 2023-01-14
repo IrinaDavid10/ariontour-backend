@@ -22,4 +22,5 @@ public class BookingsController {
         CreateBookingResponse response = createBookingUseCase.createBooking(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+    //getMapping pt tickets prin JWT token verificam user-ul si raspundem cu ticketele userului dupa jwt token
 }

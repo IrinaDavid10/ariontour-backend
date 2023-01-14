@@ -19,4 +19,5 @@ public class CreateTicketRequest {
     private Long eventId;
     private TicketEnum ticketType;
     private Double price;
+    private Long numberOfTickets;
 }

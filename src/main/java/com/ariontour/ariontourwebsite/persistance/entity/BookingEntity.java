@@ -21,7 +21,7 @@ public class BookingEntity {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(optional = true)
+    @OneToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private CustomerEntity customer;
 
@@ -29,4 +29,7 @@ public class BookingEntity {
     @Column(name = "date_time")
     LocalDateTime dateTime;
 
+    @OneToOne
+    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
+    private TicketEntity ticket;
 }

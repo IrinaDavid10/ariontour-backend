@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface TicketTypeRepository extends JpaRepository<TicketTypeEntity, Long> {
      Optional<TicketTypeEntity> getByticketType(TicketEnum ticketType);
+     TicketTypeEntity findByTicketType(TicketEnum ticketType);
 }
