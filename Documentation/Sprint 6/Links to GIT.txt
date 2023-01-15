@@ -1,0 +1,5 @@
+These are the 2 repositories for my project. 
+The documents can be found in the Documentation folder in the "ariontour-project" git.
+
+https://git.fhict.nl/I391975/ariontour-frontend
+https://git.fhict.nl/I391975/ariontour-project
