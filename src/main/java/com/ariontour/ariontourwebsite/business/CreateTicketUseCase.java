@@ -4,5 +4,5 @@ import com.ariontour.ariontourwebsite.domain.*;
 
 
 public interface CreateTicketUseCase {
-    CreateTicketResponse createTicket(CreateTicketRequest request);
+    CreateTicketResponse createTicket(CreateTicketsRequest requests);
 }

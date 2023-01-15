@@ -1,23 +1,18 @@
 package com.ariontour.ariontourwebsite.domain;
 
-import com.ariontour.ariontourwebsite.persistance.entity.EventEntity;
 import com.ariontour.ariontourwebsite.persistance.entity.TicketEnum;
-import com.ariontour.ariontourwebsite.persistance.entity.TicketTypeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTicketRequest {
+public class CreateTicketsRequest {
     private Long eventId;
-    private TicketEnum ticketType;
-    private Double price;
-    private Long numberOfTickets;
+    private List<CreateTicketRequest> requests;
 }

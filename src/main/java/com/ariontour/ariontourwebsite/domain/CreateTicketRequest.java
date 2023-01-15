@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateTicketsRequest {
-    private Long eventId;
+public class CreateTicketRequest {
     private TicketEnum ticketType;
     private Double price;
     private Long numberOfTickets;

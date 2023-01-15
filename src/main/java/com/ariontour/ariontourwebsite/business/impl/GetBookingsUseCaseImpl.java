@@ -1,12 +1,11 @@
 package com.ariontour.ariontourwebsite.business.impl;
 
-import com.ariontour.ariontourwebsite.business.GetEventsUseCase;
-import com.ariontour.ariontourwebsite.domain.Customer;
-import com.ariontour.ariontourwebsite.domain.Event;
-import com.ariontour.ariontourwebsite.domain.GetCustomersResponse;
-import com.ariontour.ariontourwebsite.domain.GetEventsResponse;
-import com.ariontour.ariontourwebsite.persistance.CustomerRepository;
+import com.ariontour.ariontourwebsite.business.GetBookedEventsUseCase;
+import com.ariontour.ariontourwebsite.business.GetBookedTicketsUseCase;
+import com.ariontour.ariontourwebsite.domain.*;
+import com.ariontour.ariontourwebsite.persistance.BookingRepository;
 import com.ariontour.ariontourwebsite.persistance.EventRepository;
+import com.ariontour.ariontourwebsite.persistance.TicketRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +13,32 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class GetEventsUseCaseImpl implements GetEventsUseCase {
-    private EventRepository eventRepository;
+public class GetBookingsUseCaseImpl implements GetBookedTicketsUseCase, GetBookedEventsUseCase {
+
+    private BookingRepository bookingRepository;
+    @Override
+    public GetBookedTicketsResponse getBookedTickets(Long eventId, Long customerId){
+        List<Booking> bookings = bookingRepository.findAllByTicketEventIdAndCustomerId(eventId,customerId)
+                .stream()
+                .map(BookingConverter::convert)
+                .toList();
+        List<Ticket> tickets = bookings.stream()
+                .map(Booking::getTicket)
+                .toList();
+
+        return GetBookedTicketsResponse.builder()
+                .tickets(tickets)
+                .build();
+    }
 
     @Override
-    public GetEventsResponse getEvents(){
-        List<Event> events = eventRepository.findAll()
+    public GetBookedEventsResponse getBookedEvents(Long customerId) {
+        List<Event> events = bookingRepository.findAllEventsInBookingByCustomerId(customerId)
                 .stream()
                 .map(EventConverter::convert)
                 .toList();
 
-        return GetEventsResponse.builder()
+        return GetBookedEventsResponse.builder()
                 .events(events)
                 .build();
     }

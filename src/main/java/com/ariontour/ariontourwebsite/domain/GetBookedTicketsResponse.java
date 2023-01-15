@@ -2,10 +2,11 @@ package com.ariontour.ariontourwebsite.domain;
 
 import lombok.Builder;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
 @Builder
-public class GetCountriesResponse {
-    private List<Country> countries;
+public class GetBookedTicketsResponse {
+    private List<Ticket> tickets;
 }

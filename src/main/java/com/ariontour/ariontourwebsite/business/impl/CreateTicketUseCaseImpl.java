@@ -2,7 +2,9 @@ package com.ariontour.ariontourwebsite.business.impl;
 
 import com.ariontour.ariontourwebsite.business.CreateTicketUseCase;
 import com.ariontour.ariontourwebsite.business.exception.EventNotFoundException;
+import com.ariontour.ariontourwebsite.business.exception.TicketNotFoundException;
 import com.ariontour.ariontourwebsite.domain.CreateTicketRequest;
+import com.ariontour.ariontourwebsite.domain.CreateTicketsRequest;
 import com.ariontour.ariontourwebsite.domain.CreateTicketResponse;
 import com.ariontour.ariontourwebsite.persistance.BookingRepository;
 import com.ariontour.ariontourwebsite.persistance.EventRepository;
@@ -16,8 +18,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -30,30 +30,40 @@ public class CreateTicketUseCaseImpl implements CreateTicketUseCase {
 
     @Override
     @Transactional
-    public CreateTicketResponse createTicket(CreateTicketRequest request){
+    public CreateTicketResponse createTicket(CreateTicketsRequest requests ){
 
-        if (eventRepository.existsById(request.getEventId())){
-            List<TicketEntity> savedTickets = saveNewTickets(request);
+        if (eventRepository.existsById(requests.getEventId())){
+            if(requests.getRequests().size() == 3) {
+                List<TicketEntity> savedTicketsBronze = saveNewTickets(requests.getEventId(), requests.getRequests().get(0));
+                List<TicketEntity> savedTicketsSilver = saveNewTickets(requests.getEventId(), requests.getRequests().get(1));
+                List<TicketEntity> savedTicketsGold = saveNewTickets(requests.getEventId(), requests.getRequests().get(2));
 
-            List<Long> ticketIds = new ArrayList<>();
+                List<Long> ticketIds = new ArrayList<>();
 
-            for (TicketEntity ticket : savedTickets)
-            {
-                ticketIds.add(ticket.getId());
-            }
+                for (TicketEntity ticket : savedTicketsBronze) {
+                    ticketIds.add(ticket.getId());
+                }
+                for (TicketEntity ticket : savedTicketsSilver) {
+                    ticketIds.add(ticket.getId());
+                }
+                for (TicketEntity ticket : savedTicketsGold) {
+                    ticketIds.add(ticket.getId());
+                }
                 return CreateTicketResponse.builder()
                         .ticketId(ticketIds)
                         .build();
+            }else
+                throw new TicketNotFoundException();
         }else
 
             throw new EventNotFoundException();
 
     }
 
-    private List<TicketEntity> saveNewTickets(CreateTicketRequest request) {
+    private List<TicketEntity> saveNewTickets(Long eventId, CreateTicketRequest request) {
 
-        EventEntity event = eventRepository.findById(request.getEventId())
-                .orElseThrow(() -> new EntityNotFoundException(request.getEventId().toString()));
+        EventEntity event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new EntityNotFoundException(eventId.toString()));
 
         TicketTypeEntity ticketType = ticketTypeRepository.getByticketType(request.getTicketType())
                 .orElseThrow(() -> new EntityNotFoundException(request.getTicketType().toString()));

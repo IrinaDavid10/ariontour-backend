@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 @Builder
-public class GetBookedTicketsResponse {
-    private List<Ticket> tickets;
+public class GetBookedEventsResponse {
+    private List<Event> events;
 }

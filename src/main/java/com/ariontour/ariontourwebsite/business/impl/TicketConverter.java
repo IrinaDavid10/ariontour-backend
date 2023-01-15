@@ -1,28 +1,29 @@
 package com.ariontour.ariontourwebsite.business.impl;
 
 import com.ariontour.ariontourwebsite.business.exception.InvalidCountryException;
-import com.ariontour.ariontourwebsite.domain.Country;
-import com.ariontour.ariontourwebsite.domain.Customer;
-import com.ariontour.ariontourwebsite.persistance.entity.CountryEntity;
+import com.ariontour.ariontourwebsite.domain.*;
 import com.ariontour.ariontourwebsite.persistance.entity.CustomerEntity;
+import com.ariontour.ariontourwebsite.persistance.entity.TicketEntity;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
-
-public class CustomerConverter {
-    private CustomerConverter() {
+public class TicketConverter {
+    private TicketConverter() {
     }
 
-    public static Customer convert(CustomerEntity customer) {
-        Country country = Optional.ofNullable(customer.getCountry())
-                .map(CountryConverter::convert)
-                .orElseThrow(() -> new InvalidCountryException("404"));
+    public static Ticket convert(TicketEntity ticketEntity) {
+        Event event = Optional.ofNullable(ticketEntity.getEvent())
+                .map(EventConverter::convert)
+                .orElse(null);
+        TicketType ticketType = Optional.ofNullable(ticketEntity.getTicketType())
+                .map(TicketTypeConverter::convert)
+                .orElse(null);
 
-        return Customer.builder()
-                .id(customer.getId())
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .country(country)
+        return Ticket.builder()
+                .id(ticketEntity.getId())
+                .event(event)
+                .ticketType(ticketType)
+                .price(ticketEntity.getPrice())
                 .build();
     }
 }
+
