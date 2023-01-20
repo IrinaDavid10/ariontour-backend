@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -17,13 +19,17 @@ public class CountriesController {
     private final CreateCountryUseCase createCountryUseCase;
     private final GetCountriesUseCase getCountriesUseCase;
 
+
     @PostMapping
+    @RolesAllowed({"ROLE_ADMIN"})
     public ResponseEntity<CreateCountryResponse> createCountry(@RequestBody @Valid CreateCountryRequest request){
         CreateCountryResponse response = createCountryUseCase.createCountry(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+
     @GetMapping
+
     public ResponseEntity<GetCountriesResponse> getCountries(){
         return ResponseEntity.ok(getCountriesUseCase.getCountries());
     }

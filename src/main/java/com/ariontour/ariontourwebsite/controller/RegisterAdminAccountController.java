@@ -13,14 +13,16 @@ import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/registeradmin")
-@CrossOrigin(origins ={"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @AllArgsConstructor
 
 public class RegisterAdminAccountController {
     private final RegisterAdminAccountUseCase registerAdminAccountUseCase;
+
     @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
-    public ResponseEntity<RegisterAdminAccountResponse> registerAdminAccount(@RequestBody RegisterAdminAccountRequest request){
+    public ResponseEntity<RegisterAdminAccountResponse> registerAdminAccount(@RequestBody RegisterAdminAccountRequest request) {
         RegisterAdminAccountResponse response = registerAdminAccountUseCase.registerAdmin(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }}
+    }
+}

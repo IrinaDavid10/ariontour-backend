@@ -17,29 +17,32 @@ import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/bookings")
-@CrossOrigin(origins ={"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @AllArgsConstructor
 public class BookingsController {
     private final CreateBookingUseCase createBookingUseCase;
     private final GetBookedTicketsUseCase getBookedTicketsUseCase;
     private final GetBookedEventsUseCase getBookedEventsUseCase;
     private final AccessTokenDecoder accessTokenDecoder;
+
+
     @PostMapping
-    public ResponseEntity<CreateBookingResponse> createBooking(@RequestBody CreateBookingRequest request){
+    @RolesAllowed({"ROLE_CUSTOMER"})
+    public ResponseEntity<CreateBookingResponse> createBooking(@RequestBody CreateBookingRequest request) {
         CreateBookingResponse response = createBookingUseCase.createBooking(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
     @GetMapping("/tickets")
-    @RolesAllowed({"ROLE_ADMIN","ROLE_CUSTOMER"})
-    public ResponseEntity<GetBookedTicketsResponse> getBookedTickets(
-            @RequestParam(value = "eventId", required = true) Long eventId,
-            @RequestParam(value = "token", required = true) String token){
+    @RolesAllowed({"ROLE_CUSTOMER"})
+    public ResponseEntity<GetBookedTicketsResponse> getBookedTickets(@RequestParam(value = "eventId", required = true) Long eventId, @RequestParam(value = "token", required = true) String token) {
         Long customerId = accessTokenDecoder.decode(token).getCustomerId();
-        return ResponseEntity.ok(getBookedTicketsUseCase.getBookedTickets(eventId,customerId));
+        return ResponseEntity.ok(getBookedTicketsUseCase.getBookedTickets(eventId, customerId));
     }
+
     @GetMapping("/events")
-    @RolesAllowed({"ROLE_ADMIN","ROLE_CUSTOMER"})
-    public ResponseEntity<GetBookedEventsResponse> getBookedEvents(@RequestParam(value = "token", required = true) String token){
+    @RolesAllowed({"ROLE_CUSTOMER"})
+    public ResponseEntity<GetBookedEventsResponse> getBookedEvents(@RequestParam(value = "token", required = true) String token) {
         Long customerId = accessTokenDecoder.decode(token).getCustomerId();
         return ResponseEntity.ok(getBookedEventsUseCase.getBookedEvents(customerId));
     }

@@ -6,7 +6,9 @@ import com.ariontour.ariontourwebsite.business.exception.InvalidCredentialsExcep
 import com.ariontour.ariontourwebsite.domain.AccessToken;
 import com.ariontour.ariontourwebsite.domain.LoginRequest;
 import com.ariontour.ariontourwebsite.domain.LoginResponse;
+import com.ariontour.ariontourwebsite.persistance.CustomerRepository;
 import com.ariontour.ariontourwebsite.persistance.UserRepository;
+import com.ariontour.ariontourwebsite.persistance.entity.CustomerEntity;
 import com.ariontour.ariontourwebsite.persistance.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LoginUseCaseImpl implements LoginUseCase {
     private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final AccessTokenEncoder accessTokenEncoder;
 
@@ -43,10 +46,16 @@ public class LoginUseCaseImpl implements LoginUseCase {
     }
 
     private String generateAccessToken(UserEntity user) {
-        Long customerId = user.getId() != null ? user.getId() : null;
+        Long customerId = null;
+        if (user.getCustomer() != null) {
+            CustomerEntity customerEntity = customerRepository.findById(user.getCustomer().getId()).orElseThrow(InvalidCredentialsException::new);
+            customerId = user.getCustomer().getId();
+
+        }
         List<String> roles = user.getUserRoles().stream()
                 .map(userRole -> userRole.getRole().toString())
                 .toList();
+
 
         return accessTokenEncoder.encode(
                 AccessToken.builder()

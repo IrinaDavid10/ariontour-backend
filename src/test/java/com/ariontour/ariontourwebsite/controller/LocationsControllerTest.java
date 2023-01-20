@@ -2,6 +2,7 @@ package com.ariontour.ariontourwebsite.controller;
 
 import com.ariontour.ariontourwebsite.business.AccessTokenDecoder;
 import com.ariontour.ariontourwebsite.business.CreateCountryUseCase;
+import com.ariontour.ariontourwebsite.business.CreateLocationUseCase;
 import com.ariontour.ariontourwebsite.business.GetLocationsUseCase;
 import com.ariontour.ariontourwebsite.domain.Country;
 import com.ariontour.ariontourwebsite.domain.GetLocationsResponse;
@@ -37,6 +38,8 @@ public class LocationsControllerTest {
     private GetLocationsUseCase getLocationsUseCaseMock;
     @MockBean
     private AccessTokenDecoder accessTokenDecoder;
+    @MockBean
+    private CreateLocationUseCase createLocationUseCaseMock;
     @Test
     @WithMockUser(username = "Irma", roles = {"ADMIN"})
     void getLocations_shouldReturn200ResponseWithLocationsArray() throws Exception {
